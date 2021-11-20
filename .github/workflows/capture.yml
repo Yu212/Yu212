@@ -1,0 +1,27 @@
+name: capture-rating-graph
+on:
+  push:
+  schedule:
+    - cron: "0 3 * * *"
+jobs:
+  capture-rating-graph:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+      - name: Run python
+        run: |
+          python -m pip install --upgrade pip
+          pip install selenium
+          python capture-rating-graph.py
+      - name: Commit and Push
+        run: |
+          git config pull.rebase false
+          git config user.name "Yu212"
+          git config user.email "yu212.mc@gmail.com"
+          git add rating-graph.png
+          git commit -m "Update rating graph"
+          git pull
+          git push origin main
