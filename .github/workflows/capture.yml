@@ -18,10 +18,13 @@ jobs:
           python capture-rating-graph.py
       - name: Commit and Push
         run: |
-          git config pull.rebase false
-          git config user.name "Yu212"
-          git config user.email "yu212.mc@gmail.com"
-          git add rating-graph.png
-          git commit -m "Update rating graph"
-          git pull
-          git push origin main
+          git add -n rating-graph.png
+          if ! git diff --exit-code --quiet
+          then
+            git config pull.rebase false
+            git config user.name "Yu212"
+            git config user.email "yu212.mc@gmail.com"
+            git add rating-graph.png
+            git commit -m "Update rating graph"
+            git push origin main
+          fi
