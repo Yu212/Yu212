@@ -15,7 +15,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install selenium
-          python capture-rating-graph.py
+          python capture-rating-graphs.py
       - name: Commit and Push
         run: |
           git add -n rating-graph-algorithm.png rating-graph-heuristic.png
