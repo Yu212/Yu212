@@ -10,18 +10,16 @@ def main():
     options.add_argument("--disable-extensions")
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
-    driver = webdriver.Chrome(options=options)
-    driver.set_window_size(1920, 1080)
-    driver.get("https://atcoder.jp/users/Yu_212")
-    png = driver.find_element("id", "ratingGraph").screenshot_as_png
-    with open("./rating-graph-algorithm.png", "wb") as f:
-        f.write(png)
-    driver.get("https://atcoder.jp/users/Yu_212?contestType=heuristic")
-    png = driver.find_element("id", "ratingGraph").screenshot_as_png
-    with open("./rating-graph-heuristic.png", "wb") as f:
-        f.write(png)
-    driver.close
-    
+    with webdriver.Chrome(options=options) as driver:
+        driver.set_window_size(1920, 1080)
+        driver.get("https://atcoder.jp/users/Yu_212")
+        png = driver.find_element("id", "ratingGraph").screenshot_as_png
+        with open("./rating-graph-algorithm.png", "wb") as f:
+            f.write(png)
+        driver.get("https://atcoder.jp/users/Yu_212?contestType=heuristic")
+        png = driver.find_element("id", "ratingGraph").screenshot_as_png
+        with open("./rating-graph-heuristic.png", "wb") as f:
+            f.write(png)
 
 if __name__ == "__main__":
     main()
