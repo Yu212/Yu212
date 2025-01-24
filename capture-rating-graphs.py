@@ -12,6 +12,7 @@ def main():
     options.add_argument("--no-sandbox")
     with webdriver.Chrome(options=options) as driver:
         driver.set_window_size(1920, 1080)
+        driver.implicitly_wait(10)
         driver.get("https://atcoder.jp/users/Yu_212")
         png = driver.find_element("id", "ratingGraph").screenshot_as_png
         with open("./rating-graph-algorithm.png", "wb") as f:
